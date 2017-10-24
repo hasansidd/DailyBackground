@@ -121,7 +121,10 @@ public class PhotoList {
         private Integer isfamily;
         @SerializedName("url_k")
         @Expose
-        private String url;
+        private String urlk;
+        @SerializedName("url_q")
+        @Expose
+        private String urlq;
 
         public String getId() {
             return id;
@@ -195,13 +198,20 @@ public class PhotoList {
             this.isfamily = isfamily;
         }
 
-        public String getUrl() {
-            return url;
+        public String getUrlk() {
+            return urlk;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setUrlk(String urlk) {
+            this.urlk = urlk;
         }
 
+        public String getUrlq() {
+            return urlq;
+        }
+
+        public void setUrlq(String urlq) {
+            this.urlq = urlq;
+        }
     }
 }
