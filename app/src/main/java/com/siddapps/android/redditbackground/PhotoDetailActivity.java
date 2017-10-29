@@ -25,16 +25,20 @@ import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 
 public class PhotoDetailActivity extends AppCompatActivity {
     public static final String TAG = "PhotoDetailActivity";
     private ImageView mImageView;
     private Button mButton;
     private LinearLayout mLinearLayout;
+    private Bitmap mBitmap;
+    private Target mTarget;
 
-    public static Intent newIntent(Context context, String url) {
+    public static Intent newIntent(Context context, String urlString) {
         Intent i = new Intent(context, PhotoDetailActivity.class);
-        i.putExtra("URL", url);
+        i.putExtra("URL", urlString);
         return i;
     }
 
@@ -45,39 +49,44 @@ public class PhotoDetailActivity extends AppCompatActivity {
         this.getSupportActionBar().hide();
         mLinearLayout = (LinearLayout) findViewById(R.id.linear_layour);
 
-        final String url = getIntent().getStringExtra("URL");
+        final String urlString = getIntent().getStringExtra("URL");
         mImageView = (ImageView) findViewById(R.id.image_view);
-
-        Picasso.with(this).load(url).into(mImageView);
-
         mButton = (Button) findViewById(R.id.button);
         mButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Picasso.with(PhotoDetailActivity.this)
-                        .load(url)
-                        .into(new Target() {
-                            @Override
-                            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                                WallpaperManager wallpaperManager = WallpaperManager.getInstance(PhotoDetailActivity.this);
-                                try {
-                                    wallpaperManager.setBitmap(bitmap);
-                                    Snackbar.make(mLinearLayout, "Wallpaper set!", Snackbar.LENGTH_SHORT).show();
-                                } catch (IOException e) {
-                                    Snackbar.make(mLinearLayout, "Wallpaper not set: error", Snackbar.LENGTH_SHORT).show();
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                            }
-
-                            @Override
-                            public void onBitmapFailed(Drawable errorDrawable) {
-                            }
-                        });
+                mButton.setEnabled(false);
+                WallpaperManager wallpaperManager = WallpaperManager.getInstance(PhotoDetailActivity.this);
+                    Uri uri = Uri.parse(urlString);
+                    Intent i = wallpaperManager.getCropAndSetWallpaperIntent(uri);
+                    startActivity(i);
+                    Snackbar.make(mLinearLayout, "Wallpaper set!", Snackbar.LENGTH_SHORT).show();
             }
         });
+
+        mTarget = new Target() {
+            @Override
+            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
+                Log.e(TAG, "loaded");
+                mBitmap = bitmap;
+                mImageView.setImageBitmap(bitmap);
+                mButton.setEnabled(true);
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                Log.e(TAG, "preparing");
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+                Log.e(TAG, "failed");
+            }
+        };
+
+        Picasso.with(PhotoDetailActivity.this)
+                .load(urlString)
+                .into(mTarget);
     }
 }
