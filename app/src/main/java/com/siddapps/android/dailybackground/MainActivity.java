@@ -1,4 +1,4 @@
-package com.siddapps.android.redditbackground;
+package com.siddapps.android.dailybackground;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

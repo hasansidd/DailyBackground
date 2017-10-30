@@ -1,4 +1,4 @@
-package com.siddapps.android.redditbackground;
+package com.siddapps.android.dailybackground;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

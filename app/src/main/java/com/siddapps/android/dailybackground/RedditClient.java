@@ -1,4 +1,4 @@
-package com.siddapps.android.redditbackground;
+package com.siddapps.android.dailybackground;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
