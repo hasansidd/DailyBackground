@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RedditBackground</string>
+    <string name="app_name">DailyBackground</string>
     <string name="set_as_wallpaper">Set As Wallpaper</string>
     <string name="view_full_size">View Full Size</string>
 </resources>
