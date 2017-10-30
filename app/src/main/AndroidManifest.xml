@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.siddapps.android.redditbackground">
+          package="com.siddapps.android.dailybackground">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
@@ -12,15 +12,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.siddapps.android.redditbackground.dailybackground.siddapps.android.redditbackground.MainActivity">
+
+        <activity
+            android:name="com.siddapps.android.dailybackground.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.siddapps.android.redditbackground.dailybackground.siddapps.android.redditbackground.PhotoDetailActivity"
+
+        <activity
+            android:name="com.siddapps.android.dailybackground.PhotoDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+
+        <provider
+            android:name=".data.PhotoProvider"
+            android:authorities="com.siddapps.android.dailybackground"
+            android:exported="false"/>
+
+        <service
+            android:name=".data.PhotoUpdateService"
+            android:exported="false" />
 
     </application>
 
