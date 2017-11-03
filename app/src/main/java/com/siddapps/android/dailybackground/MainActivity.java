@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.siddapps.android.dailybackground.reddit.RedditClient;
+import com.siddapps.android.dailybackground.reddit.RedditListing;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

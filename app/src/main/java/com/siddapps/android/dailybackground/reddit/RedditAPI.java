@@ -1,4 +1,4 @@
-package com.siddapps.android.dailybackground;
+package com.siddapps.android.dailybackground.reddit;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,5 +1,5 @@
 
-package com.siddapps.android.dailybackground;
+package com.siddapps.android.dailybackground.reddit;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
